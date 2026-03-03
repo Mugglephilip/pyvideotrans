@@ -1,0 +1,106 @@
+# Faster-Whisper Configuration for Speech Recognition
+# This file configures the parameters for faster-whisper speech-to-text
+
+# Model settings
+model:
+  # Model name or path. Options: tiny, base, small, medium, large-v1, large-v2, large-v3
+  # Using base model for faster inference on CPU
+  name: "base"
+  
+  # Device to run the model on: "cpu" or "cuda"
+  device: "cpu"
+  
+  # Compute type for inference
+  # Use "float32" for CPU, "float16" for GPU with CUDA
+  compute_type: "float32"
+
+# VAD (Voice Activity Detection) settings
+vad:
+  # Enable VAD filtering to remove silent segments
+  filter: true
+  
+  # VAD threshold (0.0-1.0)
+  threshold: 0.5
+  
+  # Minimum speech duration in milliseconds
+  min_speech_duration_ms: 250
+  
+  # Maximum speech duration in seconds
+  max_speech_duration_s: 30
+  
+  # Minimum silence duration in milliseconds to split speech
+  min_silence_duration_ms: 100
+
+# Transcription settings
+transcription:
+  # Source language code (e.g., "en", "zh", "ja", "ko")
+  # Leave empty or set to "auto" for automatic language detection
+  language: "auto"
+  
+  # Task type: "transcribe" or "translate" (translate will translate to English)
+  task: "transcribe"
+  
+  # Temperature for sampling (0.0-1.0)
+  # Higher values = more diverse output, lower = more deterministic
+  temperature: 0.0
+  
+  # Best of parameter (beam search)
+  best_of: 5
+  
+  # Beam size for beam search
+  beam_size: 5
+  
+  # Length penalty
+  length_penalty: 1.0
+  
+  # Repetition penalty
+  repetition_penalty: 1.0
+  
+  # No speech threshold (filter out segments with low confidence)
+  no_speech_threshold: 0.6
+  
+  # Logprob threshold (for language detection)
+  logprob_threshold: -1.0
+  
+  # Compression ratio threshold (detect hallucinations)
+  compression_ratio_threshold: 2.4
+
+# Prompt settings
+prompt:
+  # Initial prompt to guide the transcription
+  # Useful for improving accuracy with specific vocabulary or context
+  initial_prompt: ""
+  
+  # Prefix for the transcription
+  prefix: null
+  
+  # Condition on previous text (for better context)
+  condition_on_previous_text: true
+  
+  # Pattern for detecting language (regex)
+  language_detection_threshold: 0.5
+
+# Output settings
+output:
+  # Word-level timestamps (slower but more detailed)
+  word_timestamps: false
+  
+  # Highlight words in output (requires word_timestamps=true)
+  highlight_words: false
+  
+  # Maximum number of words per line in SRT
+  max_words_per_line: 20
+  
+  # Format output with proper punctuation
+  clean_output: true
+
+# Performance settings
+performance:
+  # Number of workers for parallel processing
+  num_workers: 1
+  
+  # Batch size for processing (GPU only)
+  batch_size: 16
+  
+  # Enable GPU cache
+  use_gpu_cache: true

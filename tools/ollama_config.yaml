@@ -1,0 +1,107 @@
+# Ollama Translation Configuration
+# This file configures the parameters for local Ollama LLM translation
+
+# API Settings
+api:
+  # Ollama API base URL
+  # Default is local Ollama installation
+  base_url: "http://localhost:11434"
+  
+  # API endpoint for completions
+  endpoint: "/api/generate"
+  
+  # Timeout for API requests in seconds
+  timeout: 120
+
+# Model Settings
+model:
+  # Model name to use for translation
+  # Popular choices: llama2, mistral, codellama, llama3, qwen2
+  name: "llama3"
+  
+  # Context window size (optional, model default if not specified)
+  context_length: 8192
+  
+  # Number of tokens to generate
+  max_tokens: 2048
+
+# Generation Parameters
+generation:
+  # Temperature for sampling (0.0-2.0)
+  # Lower values = more deterministic, higher = more creative
+  temperature: 0.3
+  
+  # Top-p sampling (nucleus sampling)
+  # Consider tokens with cumulative probability up to top_p
+  top_p: 0.9
+  
+  # Top-k sampling
+  # Sample from top k most likely tokens
+  top_k: 40
+  
+  # Repetition penalty (1.0 = no penalty, >1.0 = penalize repetition)
+  repeat_penalty: 1.1
+  
+  # Number of beams for beam search (1 = no beam search)
+  num_beams: 1
+
+# Translation Settings
+translation:
+  # Target language for translation
+  # Examples: "Chinese", "English", "Japanese", "Korean", "French", "German"
+  target_language: "Chinese"
+  
+  # Source language (optional, auto-detect if empty)
+  source_language: ""
+  
+  # Translation style/prompt
+  # This will be prepended to the translation request
+  system_prompt: |
+    You are a professional subtitle translation engine.
+    Translate the following SRT subtitle content accurately while preserving the timing and structure.
+    Output ONLY the translated content, no explanations or additional text.
+    Maintain the original SRT format exactly:
+    - Keep line numbers unchanged
+    - Keep timestamps unchanged
+    - Translate only the subtitle text
+    - Preserve line breaks and formatting
+
+# Format Settings
+format:
+  # Input format: "srt" or "text"
+  # "srt" = expects full SRT content with timestamps
+  # "text" = expects plain text, one line per subtitle
+  input_format: "srt"
+  
+  # Output format: "srt" or "text"
+  output_format: "srt"
+  
+  # Whether to preserve line numbers
+  preserve_line_numbers: true
+  
+  # Whether to preserve timestamps
+  preserve_timestamps: true
+
+# Performance Settings
+performance:
+  # Number of concurrent translation requests
+  # Higher values = faster but more resource intensive
+  max_concurrent: 5
+  
+  # Batch size for processing (number of subtitle lines per request)
+  # For LLM, usually 1 request = full SRT content
+  batch_size: 1
+  
+  # Delay between requests in seconds (to avoid rate limiting)
+  request_delay: 0.5
+
+# Retry Settings
+retry:
+  # Maximum number of retry attempts on failure
+  max_retries: 3
+  
+  # Delay between retries in seconds
+  retry_delay: 5
+  
+  # Exponential backoff multiplier
+  backoff_multiplier: 2.0
