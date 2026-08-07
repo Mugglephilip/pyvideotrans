@@ -133,6 +133,18 @@ uv run webui.py
 ```
 
 
+**TUI** (terminal dashboard for batch video/subtitle translation):
+```bash
+uv sync --extra tui
+uv run tui.py
+```
+
+> TUI key bindings: `n` new task · `c` cancel running job · `r` retry failed/cancelled job · `x` remove finished job · `q` quit. Each job's parameters (file, languages, voice role) are chosen in the terminal; outputs are written to `output/<name>_<timestamp>/` and never overwrite existing files.
+>
+> On machines where the full dependency sync cannot complete (e.g. macOS Intel with `torch==2.7.1`, which has no x86_64 wheel), install only the TUI runtime and skip the sync:
+> `uv pip install textual` then `uv run --no-sync tui.py`.
+
+
 **Docker** (containerized deployment):
 ```bash
 # Build
@@ -214,5 +226,3 @@ This project mainly relies on the following open-source projects (partial):
 ---
 
 *Created by [jianchang512](https://github.com/jianchang512)*
-
-

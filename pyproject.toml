@@ -278,6 +278,9 @@ dependencies = [
 webui = [
 	"gradio"
 ]
+tui = [
+	"textual>=2.0",
+]
 
 [dependency-groups]
 dev = [
@@ -339,5 +342,4 @@ pynini = [
 
 #faster-whisper = { url = "https://github.com/SYSTRAN/faster-whisper/archive/refs/heads/master.tar.gz" }
 chatterbox-tts = { url = "https://github.com/resemble-ai/chatterbox/archive/refs/heads/master.tar.gz" }
-
 
